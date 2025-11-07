@@ -1,4 +1,5 @@
 ###### What is Markdown?
+is a language of markup 
 
 ## Headings
 # Main title
@@ -27,11 +28,12 @@ Anteposing a > makes a block quotes as in the following example:
 
 ## Insert an image
 The command line for inserting an image is the following
-''' ![](image_path) '''
-(the text cointained in the 'is not interpreted).
-![Immagine](images/ "Esempio di immagine")
+`![Immagine](images/isteresi.png "Esempio di immagine")`
+(the text cointained in the backticks - Alt + 96 - is interpreted as code).  
 
-  
+Anyway, since Markdown has not a command for resizing the image, it is possible to insert HTML code for doing this:
+'<img src="immagine.png" alt="Descrizione" width="300"/>'
+<img src="images/isteresi.png" alt="Descrizione" width="300"/>  
 
 ## Insert a document
 
