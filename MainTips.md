@@ -58,8 +58,8 @@ Anyway, since Markdown has not a command for resizing the image, it is possible 
 Use this command line:
 `[![Immagine](images/isteresi.png "Esempio di immagine")](https://en.wikipedia.org/wiki/Hysteresis)`
 [<img src="images/isteresi.png" alt="Esempio di immagine" width="300"/>](https://en.wikipedia.org/wiki/Hysteresis)
-## Insert a document
 
-## Code Blocks
-
+## Tables
+## Documents
+## Math 
 
