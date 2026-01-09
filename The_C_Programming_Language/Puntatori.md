@@ -18,7 +18,7 @@ printf("%d",my_ptr) // 9472
 printf("%d",*my_ptr) // 180
 
 ## Puntatori e parametri delle funzioni
-#### Es.1-----------------------------------------------------------------
+### Es.1-----------------------------------------------------------------
 int main(){
   int a = 10;
   modifica(a); 
@@ -28,7 +28,7 @@ void modifica(int x) {
   x = x + 1 //a = 11
   }
 
-#### Es.2------------------------------------------------------------
+### Es.2------------------------------------------------------------
 int main(){
   int a = 10;
   modifica(&a); // la funzione prende come argomento l'indirizzo in cui si trova a (es. 9472)
@@ -38,4 +38,10 @@ int main(){
 void modifica(int *x) {
   *x = *x + 1 //prende il valore cont. nell'indirizzo (10) aggiunge 1 e lo assegna come valore all'indirizzo memorizzato in x
   }
+
+  
+## Puntatori e array
+## Aritmetica dei puntatori
+
+
 
