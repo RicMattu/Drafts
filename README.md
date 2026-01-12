@@ -15,4 +15,6 @@ For the same reason as above, I think that none will need assistance, but in cas
 Anyone can contribute to this project.
 -->
 ## Files list:
-
+The C Programming language/ 
+esercizi in C/
+images/
