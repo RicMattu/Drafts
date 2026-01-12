@@ -254,8 +254,9 @@ auto val = 10;
 in questo caso l' inizializzazione va fatta subito
 
 
-## Function overload
-
+- Function overload (area cerchio e area rettangolo)
+- parametri con valori di default
+- automatic return type (solo se la funzione è def. prima, no prototipo)
 
 
 
