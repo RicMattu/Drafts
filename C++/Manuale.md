@@ -1,9 +1,10 @@
 # C++
-
+## 1) Introduzione
 Inventato da Bjarne Striustrup nel 1979.  
 Il nome iniziale sarebbe dovuto essere: _C with classes_, si basa sul linguaggio C, ma è ispirato a simula (primo linguaggio obj oriented).  
 Nel 1983 il nome è diventato C++ (incremento di C).  
-Esistono varie versioni del 2011/14/17 <- corrente (modern C++ da 2011)
+Esistono varie versioni del 2011/14/17 <- corrente (modern C++ da 2011).  
+Il primo classico programma è:
 ```C++
 #include <iostream> 
 
@@ -13,11 +14,12 @@ int main(){
         return 0;
 }
 ```
-- endl <- end line (\n)  
-- operatori inserimento stream <- << <<
-- :: <- scope resoluton operator
+dove:
+1. _endl_ significa end line (\n)
+2. _<< <<_ sono gli operatori inserimento stream  
+3. :: è lo scope resoluton operator
 
-## Namespace
+## 2) Namespace
 Servono a evitare conflitti con i nomi (definisce dei macroinsiemi)
 ```C++
 #include <iostream> 
@@ -35,7 +37,7 @@ namespace ns2 {
 }
 
 int main(){
-  std::cout << ns2::fun()<<std::endl;
+  std::cout << ns2::fun() << std::endl;
 return 0;
 }
 ```
@@ -55,7 +57,7 @@ namespace ns1::ns2 {
   }
 }
 ```
-### Importare un namespace
+### 2.1) Importare un namespace
 localmente o globalmente
 ```
 using namespace ns1
@@ -89,7 +91,7 @@ namespace ns1 {
 using namespace ns1
 
 int main(){
-  std::cout << fun()<<std::endl;
+  std::cout << fun() << std::endl;
 return 0;
 }
 ```
@@ -114,7 +116,7 @@ int main(){
 return 0;
 }
 ```
-In pratica è come chiamare una libreria in python
+È quasi come chiamare una libreria in python
 ```C++
 #include <iostream>
 
@@ -126,18 +128,13 @@ int main(){
 	return 0;
 }
 ```
-## Stream
-Gli stream sono flussi di input output, sono una caratteristica di C++  
-
-L'idea è generalizzare il concetto input e output
-
-> cout è lo stream di output
-
-> essenziali sono << << gli operatori di inserimento
-
-> manipolatori: endl (inserisce il ritorno a capo nello stream
-
-> cin (acquisire un input)
+## 3) Stream
+Gli stream sono flussi di input output, sono una caratteristica di C++.  
+L'idea è generalizzare il concetto input e output:
+- _cout_ è lo stream di output
+- essenziali sono << << gli operatori di inserimento
+- manipolatori: _endl_ (inserisce il ritorno a capo nello stream)
+- _cin_ (acquisire un input)
 
 Esempio
 ```C++
@@ -155,6 +152,7 @@ int main(){
 }
 
 ```
+In questo esempio usiamo la libreria _string_ (vedi ...)
 ```C++
 #include <iostream>
 #include <string>
@@ -169,19 +167,21 @@ int main(){
 	cout << "La stringa è"<<endl<< mystring<< endl;
 }
 ```
-## Variabili
-Anche in C++ le variabili vanno dichiarate con il datatype (int myvar;)  
-Modi di assegnare una variabile  
-1. Assignment notation:     int var = 1;
-2. Functional notation:     int var(1);
-3. Braced notation:         int var {1}; // quello consigliato (da warning anxochè approx 15.2 a 15, ad esempio)
+## 4) Variabili
+Anche in C++ le variabili vanno dichiarate con il datatype (int myvar;), ma esistono vari
+modi di assegnare una variabile:
+1. Assignment notation:     `int var = 1;`
+2. Functional notation:     `int var(1);`
+3. Braced notation:         `int var {1}; // quello consigliato`
 
-Zero initilization:
-int x = 0;  
-è equivalente a  
-int x {};
+L'ultimo è quello consigliato perchè ad esempio da warning anzichè approx 15.2 a 15.
 
-## Variabili e literal interi 
+### 3.1) Zero initilization:
+Sono equivalenti:
+- `int x = 0`;  
+- `int x {}`;
+
+## 5) Variabili e literal interi 
 1. In C++ è ammesso l'uso degli apici per la leggibilità dei numeri
 2. Oltre ai formari già noti:
 	- 0x esadecimale
@@ -189,15 +189,15 @@ int x {};
 è ammesso:
 	- 0B oppure ob binario
 
-## Boolean
-La notazione per il tipo  si indica con _bool_ e prende valori {true, false}
-__________________________________________________________________________________
-## Conversioni implicite e esplicite
+## 6) Boolean
+La notazione per il tipo  si indica con `bool` e prende valori `{true, false}`
+
+## 7) Conversioni implicite e esplicite
 Gli operandi devono essere tutti dello stesso tipo, in caso di conflitto avviene una conversione automatica  
 in C++ si può usare questo tipo di cust:
-> static_cast<type>(expression)
+`static_cast <type> (expression)`
 
-## Enumerazioni
+## 8) Enumerazioni
 ```C++
 enum class PuntoCardinale{
         Nord, Sud, Ovest, Est
@@ -205,20 +205,19 @@ enum class PuntoCardinale{
 
 PuntoCardinale pc {PuntoCardinale::Est}
 ```
-## Alias per data types
+
+## 9) Alias per data types
 in C era
-typedef unsigned int Altezza; 
+`typedef unsigned int Altezza;`
 diventa
-using Altezza = unsigned int
+`using Altezza = unsigned int`
 
-## Scope e Lifetime (contesto e ciclo di vita)
-Afferiscono a spazio e tempo
-
+## 10) Scope e Lifetime (contesto e ciclo di vita)
+Afferiscono a spazio e tempo, come in C:
 1. automatic storage duration (locali)
 2. static storage duration (globali)
 3. dynamic storage duration (esistono fino al termine del programma o finchè vengono cancellate)
 4. thread storage duration (per la programmazione multiyhread)
-
 ```C++
  #include <iostream>
 
@@ -233,21 +232,19 @@ int main(){
 
  return 0;
 }
-
 ```
-## Range based for loop
-
+## 11) Range based for loop
+Oltre al classico ciclo for in C,
+```C
 for (iniz; cond; iter) 
-        statment
-
-può diventare
+	\\ statment
+```
+si può fare:
 ```C++
 // for (range_decl : range_expres)
 //        statement
 ```
-
-
-
+------------------------
 
 ## inferenza automatica di tipo
 auto val = 10;
