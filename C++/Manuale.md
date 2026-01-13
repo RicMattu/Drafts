@@ -97,7 +97,7 @@ posso anche importare solo elementi specifici:
 ```C++
 using namespace ns1::struct
 ```
-Ed è possibile attribuirgli un alias:
+Ed è possibile attribuirgli un alias, come segue:
 ```C++
 #include <iostream> 
 
@@ -106,7 +106,7 @@ namespace ns1 {
     return 2;
   }
 }
-
+// [namespace alias = ..]
 namespace ns = ns1::mysns
 
 int main(){
@@ -127,14 +127,16 @@ int main(){
 }
 ```
 ## Stream
-Flussi di input output  
-caratteristica di c++  
+Gli stream sono flussi di input output, sono una caratteristica di C++  
 
 L'idea è generalizzare il concetto input e output
 
 > cout è lo stream di output
+
 > essenziali sono << << gli operatori di inserimento
+
 > manipolatori: endl (inserisce il ritorno a capo nello stream
+
 > cin (acquisire un input)
 
 Esempio
@@ -153,7 +155,7 @@ int main(){
 }
 
 ```
-```
+```C++
 #include <iostream>
 #include <string>
 
@@ -168,7 +170,7 @@ int main(){
 }
 ```
 ## Variabili
-Anche c++ le variabili vanno dichiarate con il datatype (int myvar;)
+Anche in C++ le variabili vanno dichiarate con il datatype (int myvar;)  
 Modi di assegnare una variabile  
 1. Assignment notation:     int var = 1;
 2. Functional notation:     int var(1);
@@ -179,18 +181,17 @@ int x = 0;
 è equivalente a  
 int x {};
 
-
 ## Variabili e literal interi 
-- uso degli apici per la leggibilità dei numeri
-Formati:
-- 0x esadecimale
-- 0 ottale
-- 0B oppure ob binario
+1. In C++ è ammesso l'uso degli apici per la leggibilità dei numeri
+2. Oltre ai formari già noti:
+	- 0x esadecimale
+	- 0 ottale
+è ammesso:
+	- 0B oppure ob binario
 
 ## Boolean
-il tipo si scrive
-bool e prende valori {true, false}
-
+La notazione per il tipo  si indica con _bool_ e prende valori {true, false}
+__________________________________________________________________________________
 ## Conversioni implicite e esplicite
 Gli operandi devono essere tutti dello stesso tipo, in caso di conflitto avviene una conversione automatica  
 in C++ si può usare questo tipo di cust:
@@ -204,7 +205,6 @@ enum class PuntoCardinale{
 
 PuntoCardinale pc {PuntoCardinale::Est}
 ```
-
 ## Alias per data types
 in C era
 typedef unsigned int Altezza; 
@@ -258,13 +258,130 @@ in questo caso l' inizializzazione va fatta subito
 - parametri con valori di default
 - automatic return type (solo se la funzione è def. prima, no prototipo)
 
+## Allocazione dinamica della memoria
+in C++ abbiamo gli operatori _new_ e _delete_
+```
+type *ptr = new type;
+type *ptr = new type[n_el]; // per gli array
+```
+Per liberare l'area di memoria si usa:
+```
+delete ptr;
+```
+L'operatore delete funziona solo per la memoria allocata dinamicamente attraverso l'operatore new.  
+Per liberare invece la memoria allocata per un array si usa:
+```
+type *ptr = new type[n_el]; // per gli array
+delete[] ptr;
+```
 
+## Reference
+Un reference è un alias per una variabile  
+In pratica è un modo per accedere a una variabile con alcune differenze
+```
+type var = value;
+// si può iniz. in due modi
+type& ref = var;
+type &ref = var
+```
+### Reference come params
+1. Anzichè passare il valore per copia, passo l valore come reference cioè l'indirizzo di memoria, così le funzioni lavoraro sugli argomenti.
+```
+// Prima
+RetType fun(type par);
+RetType x = fun (args);
 
+// Ora
+RetType fun(type& par);
+RetType x = fun(args);
 
+```
+### Reference costanti
 
+## Object - Orentation:
 
+- Programmazione procedurale:  
+Dati - Funzioni  
+il C funziona solo così
 
+- Programmazione OO:
+Oggetti - Classi
+Dati e funzioni sono in generale Oggetti
+gli oggetti hanno attributi (dati) e metodi (funzioni)
 
+Un oggetto è dotato di 
+1. Stato
+2. Comportamento
+3. Identità
+
+### Stato  
+- Ogni oggetto contiene degli attributi (titolo, numero pagine, ecc..)
+- I valori possono cambiare
+- Lo stato è l'inisieme dei valori degli attributi di un oggetto a un certo istante
+- Lo stato solitamente è privato (information hiding)
+
+### Comportamento
+- Insieme di operazioni che l'oggettto può svolgere
+- operazioni che sa svolgere
+- operazioni che conosce
+- Possono esssere pubblicge o private
+
+### Identità
+- Ogni oggetto deve avere degli attributi che costituiscono la sua identità
+- (fatta in automatico)
+
+  
+## Classi
+Gli oggetti snono entità individuali che appartengono a una classe (sono istanza di una classe)
+definisce la struttura generale e il comportamento
+es. classe = libro, oggetto = Mille e una notte 
+
+## Relazioni
+Relazioni tra oggetti e classi = classificazione   
+Posso dichiarare sottoclassi a una classe (superclasse) -> generalizzazione (vale solo tra classi)
+es. veicolo -> (moto, auto)
+
+## CLASSI IN C++
+### Classe String
+
+```C++
+#include <string>
+using namespace std;
+
+string nome;
+// Abbiamo istanziato un oggetto della classe string
+
+string nome {'Riccardo'};
+// Istanziato e inizializzato
+```
+Per accedere ai mebri di una classe si usa la dot-notation
+oggetto.membro; // attributi
+oggetto.membro(); // metodi
+```
+Riccardo.length(); //8
+```
+### Dichiarare una classe
+
+```C++
+class NomeClasse {
+// Membri (attr e metodi)
+};
+```
+Di default tutti i membri della classe sono privati, è possibile specificarlo:
+```C++
+class NomeClasse {
+private:
+	// Membri (attr e metodi)
+public:
+	// Membri
+};
+```
+Esempio:
+```C++
+class Persona {
+// Membri (attr e metodi)
+};
+```
 
 
 
