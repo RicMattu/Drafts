@@ -379,9 +379,216 @@ public:
 Esempio:
 ```C++
 class Persona {
-// Membri (attr e metodi)
+public:
+	string nome;
+	string cognome;
+
+	void saluta() {
+		//
+	}
 };
 ```
+
+## Costruttore 
+- è un metodo che si chiamo come la classe;
+- ci va inserito il codice che vogliamo venga inserito ogni volta che la classe viene inizializzata
+- il costruttore senza argomenti è di default, se non viene definito lo fa in automatico
+```C++
+// 13/01/2026
+// RM
+#include <iostream
+using namespace std;
+class Persona {
+public:
+	string nome;
+	string cognome;
+
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+
+	Persona(){
+		nome = "Nome";
+		cognome = "Cognome";
+	}
+};
+
+int main(){
+    Persona p;
+    p.saluta();
+    return 0;
+}
+```
+Esiste un modo equivalente per definire il costruttore esternamente
+
+```C++
+#include <iostream
+using namespace std;
+class Persona {
+public:
+	string nome;
+	string cognome;
+
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+
+	Persona() // qui metto il prototipo
+};
+Persona::Persona() {
+	nome = "Nome";
+	cognome = "Cognome";
+}
+int main(){
+    Persona p;
+    p.saluta();
+    return 0;
+}
+```
+## Overload dei costruttori
+
+class Persona {
+public:
+	string nome;
+	string cognome;
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+	Persona(){
+		nome = "Nome";
+		cognome = "Cognome";
+	}
+	Persona(string p_nome, string p_cognome) {
+		nome = p_nome;
+		cognome = p_cognome;
+	}	
+};
+Ora posso creare istanze:
+int main(){
+	// vecchio
+    Persona p; //<- se non definisco il costruttore non funziona 
+    p.saluta();
+	//nuovo
+	Persona p2("Riccardo","Mattu");
+	p2.saluta()
+    return 0;
+}
+
+
+Posso anche formire dei valori di default ai costruttori
+class Persona {
+public:
+	string nome;
+	string cognome;
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+	Persona(){
+		nome = "Nome";
+		cognome = "Cognome";
+	}
+	Persona(string p_nome, string p_cognome = "Rossi") {
+		nome = p_nome;
+		cognome = p_cognome;
+	}	
+};
+
+## Liste di inizializzazione
+UN modo alternativo di fenire un costruttore
+```C++
+class Persona {
+public:
+	string nome;
+	string cognome;
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+	Persona(){
+		nome = "Nome";
+		cognome = "Cognome";
+	}
+	Persona(string p_nome, string p_cognome = "Rossi")
+		: nome(p_nome), cognome(p_cognome){
+	}	
+};
+```
+
+## Distruttori 
+Si definisce come il costruttore ma con un ~ davanti
+viene invocato autoomaticamente alla fine dello scope 
+Quando e perchè dichiararlo?
+Se alloco dinamicamente la memoria nel costruttore è bene liberarla con il distruttore.
+es.
+~Persona(){
+// messaggio da visualizzare
+}
+
+## Keyword this
+- puntatore all'istanza corrente della classe
+```C++
+class Persona {
+public:
+	string nome;
+	string cognome;
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+	Persona(){
+		nome = "Nome";
+		cognome = "Cognome";
+	}
+	Persona(string p_nome, string p_cognome = "Rossi"){
+		this -> nome = nome;
+		this -> cognome = cognome;
+	}	
+};
+```
+
+## Keyword default
+Posso assegnare dei valori di default anche così, questo non mi costringe a passare i parametri al costruttore
+```C++
+class Persona {
+public:
+	string nome = "Nome";
+	string cognome = "Cognome";
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+	Persona() = default;
+
+	Persona(string p_nome, string p_cognome = "Rossi"){
+		this -> nome = nome;
+		this -> cognome = cognome;
+	}	
+};
+```
+## Keyword explicit
+conversioni custom
+
+## Costruttori delega
+
+## Copy constructor
+Supponiamo di voler assegnare un istanza già inizializzata:
+```
+int main(){
+	Persona p("Mario","Rossi");
+	Persona q = p;
+	return 0;
+}
+```
+Qua l'assegnazione avviene invocando un copy constructor (di default, in questo caso)
+
+Il copy constructor copia tutti i valori degli attributi (shallow copy), copia superficiale che crea problemi con i puntatori  
+cioè il nuovo puntatore punta alla stessa area di memoria 
+Noi vogliamo creare una deep copy:
+
+
+
+
+
+
+
+
 
 
 
