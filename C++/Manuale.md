@@ -580,6 +580,209 @@ cioè il nuovo puntatore punta alla stessa area di memoria
 Noi vogliamo creare una deep copy:
 
 
+## Membri privati di una classe
+```C++
+class Persona {
+private: // contiene gli attributi
+	string nome;
+	string cognome;
+public:
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+
+	Persona(string p_nome, string p_cognome = "Rossi"):
+		nome {p_nome}, cognome {p_cognome}{}
+
+};
+```
+Se un attributo è privato poi non posso modificarlo con
+`p.nome = "new name"`
+
+per poter accedere ai nomi in sola lettura si usano gli **Accessor Methods**
+
+```C++
+class Persona {
+private: 
+	string nome;
+	string cognome;
+public:
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+//----------------------------------------------------
+	string getNome() {return nome; }
+	string getCognomeme() {return cognome; }
+//----------------------------------------------------
+	Persona(string p_nome, string p_cognome = "Rossi"):
+		nome {p_nome}, cognome {p_cognome}{}
+
+};
+```
+A questo punto nel main:
+```
+int main(){
+    Persona p("Riccardo");
+	cout << p.getNome() << " " << p.getCognome() <<endl;
+	
+	return 0;
+}
+```
+Per poterli modificare usiamo dei mutator methods 
+```C++
+class Persona {
+private: 
+	string nome;
+	string cognome;
+public:
+	void saluta() {
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+//----------------------------------------------------
+	string getNome() {return nome; }
+	string getCognomeme() {return cognome; }
+	void setNome() { this -> nome = nome;}
+	void setCognome() { this -> cognome = cognome;}
+//----------------------------------------------------
+	Persona(string p_nome, string p_cognome = "Rossi"):
+		nome {p_nome}, cognome {p_cognome}{}
+
+};
+```
+
+```
+int main(){
+    Persona p("Riccardo");
+	p.setCognome("Mattu");
+	cout << p.getNome() << " " << p.getCognome() <<endl;
+	
+	return 0;
+}
+```
+
+## Variabile const
+È possibile definire u oggetto costante:
+`const Persona p("Riccardo","Mattu")`
+su questa classe non si può usare nessun metodo né accedere a nessun attributo.  
+Allora a che serve?
+ESistono dei metodi di sola lettura, quindi possiamo dichiarali come const, tanto non cambiano lo stato dell'oggetto
+```C++
+class Persona {
+private: 
+	string nome;
+	string cognome;
+public:
+	void saluta() const { // <---------------------------------------------
+		cout << "Ciao da "<< nome << " " << cognome <<endl;
+	}
+
+	string getNome() const {return nome; } // <---------------------------------------------
+	string getCognomeme() const {return cognome; } // <---------------------------------------------
+	void setNome() { this -> nome = nome;}
+	void setCognome() { this -> cognome = cognome;}
+
+
+	Persona(string p_nome, string p_cognome = "Rossi"):
+		nome {p_nome}, cognome {p_cognome}{}
+
+};
+```
+Ora i metodi const possono essere usati.  
+Con la keybord `mutable` possiamo anche dire che una cosa può essere modificata anche se constante
+es. `mutable string name`, quindi anche nel caso metta const il metodo setName, in questo aso posso accedervi.
+
+## Funzioni e classi friend
+Delle singole funzioni o classi che possono accedere ai campi private.
+```C++
+// 14/01/2026
+// RM
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Incrementatore {
+private:
+	int start_value;
+
+public:	
+	Incrementatore(int val = 0):start_value {val} {}
+
+	void incrementa() {
+		start_value++;
+	}
+
+	int getState() {return start_value;}
+	void setState(int val) {this -> start_value = val; }
+
+	// mettendo il prototipo faccio in modo che la classe consideri la funzione amica
+	friend void friendFunc(Incrementatore& Incrementatore, int x);
+
+};
+
+void friendFunc(Incrementatore& Incrementatore, int x){
+	Incrementatore.start_value = x;
+}
+
+int main(){
+	Incrementatore count(2);
+	count.incrementa();
+	friendFunc(count, 14);
+	cout << count.getState() << endl;
+
+	
+	return 0;
+}
+```
+
+## Array di oggetti 
+Analogo a quello che si fa normalmente, si possono passare come elementi o istanze già istanziate o nuove
+
+## Membri Statici
+Definire membri condivisi da tutta la classe e non dalla singola istanza.
+```C++
+class Incrementatore {
+private:
+	int start_value;
+
+public:
+	static int myAttr; // non si può inizializzare direttamente a meno che:
+    inline static myAttr = 20;
+	Incrementatore(int val = 0):start_value {val} {}
+
+	void incrementa() {
+		start_value++;
+	}
+
+	int getState() {return start_value;}
+	void setState(int val) {this -> start_value = val; }
+
+
+};
+
+```
+## Ereditarietà
+
+```
+class Aclass{};
+
+class Bclass: public Aclass{};
+```
+Bclass è una classe derivata da Aclass (sottoclasse)
+
+## keyword protected
+L'ereditarietà permette di usare oltre ai membri definiti per la classe anche quelli definiti  come pubblici nella
+classe madre.
+Per questo si usa la parola chiave **protected** come via di mezzo da **public** e **private**
+
+
+
+
+
+
+
+
 
 
 
