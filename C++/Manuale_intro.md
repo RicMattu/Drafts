@@ -274,12 +274,13 @@ delete[] ptr;
 
 ## Reference
 Un reference è un alias per una variabile  
-In pratica è un modo per accedere a una variabile con alcune differenze
-```
-type var = value;
-// si può iniz. in due modi
-type& ref = var;
-type &ref = var
+La differenza consiste nel fatto che una variabile reference non ha una locazione di memoria propria, ma punta a quella di una variabile ordinaria già esistente. Per questo motivo, l'inizializzazione deve avvenire contestualmente alla dichiarazione come mostrato nell'esempio seguente:
+```C++
+int a = 1;
+int& ref_a = a;
+int b = 2;
+ref_a = b; // Errore: non possiamo cambiare il riferimento dopo la dichiarazione!
+int& r; // Errore: una variabile reference deve essere inizializzata!
 ```
 ### Reference come params
 1. Anzichè passare il valore per copia, passo l valore come reference cioè l'indirizzo di memoria, così le funzioni lavoraro sugli argomenti.
